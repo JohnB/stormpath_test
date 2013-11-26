@@ -3,7 +3,7 @@ stormpath_test
 
 Test out the stormpath service
 
-# Notes while testing its UI
+# Notes while testing its web UI and ruby gem
 - I may have logged in only once before, and don't remember the signup process, so when confronted with a dialog that asks for "tenant name" I'm really flummoxed.
 - https://api.stormpath.com/forgotTenant helps me out..
 - When I see the "tenant name" I'm pretty sure I've never seen it before. Its a Heroku-style mashup like "blue-swan" or "melting-sunshine"
@@ -18,17 +18,28 @@ Test out the stormpath service
 - It reminds me to store my api key in a secure location. Why? Don't I need it for my app to talk to the server?
 - I'm told to "gem install" the app with the --pre flag, but nothing about using it with bundler and adding it to my Gemfile
 - BTW: the whole of the Gemfile looks like this:
+
+```
 source 'http://rubygems.org'
 
 gem "stormpath-sdk"  #, "pre"
+```
 
-- I finally stumble upon http://docs.stormpath.com/ruby/product-guide/ which finally tells me what the hell Stormpath *does*. Or.. maybe not.
+- I finally stumble upon http://docs.stormpath.com/ruby/product-guide/ which finally tells me what the hell Stormpath *does*. Or.. maybe not...
 
-- Back at https://github.com/stormpath/stormpath-sdk-ruby I follow along in IRB:
+- Back at https://github.com/stormpath/stormpath-sdk-ruby I follow along in IRB (changing from ruby 2.x syntax to ruby 1.9 syntax since I don't have 2.0 installed yet):
+
+```
 require 'stormpath-sdk'
-client = Stormpath::Client.new api_key_file_location: File.join(ENV['HOME'], '.stormpath', 'apiKey.properties')
+client = Stormpath::Client.new( :api_key_file_location => File.join(ENV['HOME'], '.stormpath', 'apiKey.properties') )
 NoMethodError: undefined method `new' for Stormpath::Client:Module
+```
 
-- WTF? Their API documentation does not work?!? I try it in storm_test.rb
+- WTF? Their API documentation does not work?!? I try it in https://github.com/JohnB/stormpath_test/blob/master/storm_test.rb ...
+
+# ToDo
+- Email Claire
+- Upgrade to ruby 2.0 and see if it works better
+
  
 
